@@ -7,6 +7,7 @@ to assignment 1 of ME-405
 @date       23-Jan-2023
 """
 from matplotlib import pyplot 
+
 def check_numeric(lst):
     """
     check if all values in a list of strings are numeric
@@ -24,11 +25,11 @@ def check_numeric(lst):
 
 def read_csv(filename):
     """
-    Read integers from a Comma-Separated Value file.
+    Read integers from a Comma-Separated Value file. Rejecting data that is not in the correct format.
     TODO: Complete this function.
     :param filename: An existing CSV's filename
-    :return: A list of rows from the CSV, where each row is a dictionary
-             mapping column names to cell values
+    :return:    A dictionary with the headers of the csv as the keys and the values as
+                the elements in a list.
     """
     data = {}
     with open(filename, 'r') as csv_file:
@@ -50,9 +51,10 @@ def read_csv(filename):
 
 if __name__ == '__main__':
     data = read_csv('data.csv')
-    axis_titles = list(data.keys())
-    pyplot.plot(data['Time (s)'],data[' Height (m)'])
-    pyplot.xlabel(axis_titles[0])
-    pyplot.ylabel(axis_titles[1])
+    keys = list(data.keys())
+    # pyplot is used to show the data with correct axis titles
+    pyplot.plot(data[keys[0]],data[keys[1]])
+    pyplot.xlabel(keys[0])
+    pyplot.ylabel(keys[1])
     pyplot.show()
     
